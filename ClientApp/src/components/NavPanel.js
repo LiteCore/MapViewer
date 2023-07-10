@@ -18,7 +18,7 @@ export class NavPanel extends React.Component {
                     </div>
                     <div className="col text-end m-2">
                         <Nav>
-                            <Nav.Item className="me-1" href="/Home" as={NavLink}>Home</Nav.Item>
+                            <Nav.Item className="me-1" href="/" as={NavLink}>Home</Nav.Item>
                             <Nav.Item className="me-1" href="/Map" as={NavLink}>Map</Nav.Item>
                             <Nav.Item className="me-1" href="/Editor" as={NavLink}>Editor</Nav.Item>
                         </Nav>

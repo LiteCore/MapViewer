@@ -1,4 +1,5 @@
 import 'rsuite/dist/rsuite.min.css';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
