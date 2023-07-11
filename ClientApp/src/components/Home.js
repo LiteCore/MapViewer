@@ -2,7 +2,7 @@
 export class Home extends React.Component {
     render() {
         return (
-            <div>
+            <div className="mt-5">
                 <p>
                     here should be some text about this shit, but i am too lazy for it
                 </p>
@@ -12,7 +12,7 @@ export class Home extends React.Component {
                 <ul>
                     <li>Map:
                         <p>
-                            Leaflet map for creating geometry and write to DB
+                            Maplibre map for creating geometry and write to DB
                         </p>
                     </li>
                     <li>Editor:

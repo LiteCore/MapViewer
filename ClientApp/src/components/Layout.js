@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import { NavPanel } from './NavPanel';
+import { Footer } from './Footer';
 
 export class Layout extends Component {
     static displayName = Layout.name;
@@ -9,9 +10,10 @@ export class Layout extends Component {
         return (
             <div>
                 <NavPanel />
-                <Container>
+                <div className="height-90 container">
                     {this.props.children}
-                </Container>
+                </div>
+                <Footer/>
             </div >
         );
     }

@@ -11,7 +11,7 @@ const NavLink = React.forwardRef(({ href, children, ...rest }, ref) => (
 export class NavPanel extends React.Component {
     render() {
         return (
-            <div className="container-fluid nav-panel text-center mb-3">
+            <div className="container-fluid nav-panel text-center">
                 <div className="row">
                     <div className="col text-start m-2 ms-4">
                         <h3 className="">ProjectMap</h3>
