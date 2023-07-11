@@ -9,8 +9,20 @@ import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 export class MapEditor extends React.Component {
     
     render() {
-        const onUpdate = function () {
-
+        const onCreate = function (e) {
+            SendFeature(e.features[0])
+        }
+        const onUpdate = function (e) {
+            //console.log(e)
+        }
+        const onDelete = function (e) {
+            //console.log(e.features)
+        }
+        function SendFeature(feature) {
+            fetch('home/sendfeature', {
+                method: 'POST',
+                body: JSON.stringify(feature)
+            })
         }
         return (
             <div style={{ height: '100%' }}>
@@ -31,6 +43,9 @@ export class MapEditor extends React.Component {
                             polygon: true,
                             trash: true
                         }}
+                        onCreate={onCreate}
+                        onDelete={onDelete}
+                        onUpdate={onUpdate}
                     />
                 </Map>
             </div>
