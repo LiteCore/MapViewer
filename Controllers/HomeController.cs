@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MapViewer.Database.Types;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MapViewer.Controllers
 {
@@ -7,7 +8,7 @@ namespace MapViewer.Controllers
     public class HomeController : ControllerBase
     {
         private readonly ILogger<HomeController> _logger;
-
+        
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -18,8 +19,8 @@ namespace MapViewer.Controllers
             return "api version 1.0";
         }
 
-        [HttpGet("SendFeature")]
-        public bool SendFeature(string feature)
+        [HttpPost("SendFeature")]
+        public bool SendFeature([FromBody] Feature feature)
         {
             return true;
         }

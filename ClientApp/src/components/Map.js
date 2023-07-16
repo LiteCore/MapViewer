@@ -7,7 +7,6 @@ import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 //import ControlPanel from './ControlPanel';
 
 export class MapEditor extends React.Component {
-    
     render() {
         const onCreate = function (e) {
             SendFeature(e.features[0])
@@ -19,9 +18,12 @@ export class MapEditor extends React.Component {
             //console.log(e.features)
         }
         function SendFeature(feature) {
-            fetch('home/sendfeature', {
+            fetch('api/Home/SendFeature', {
                 method: 'POST',
-                body: JSON.stringify(feature)
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify( feature )
             })
         }
         return (
@@ -34,7 +36,7 @@ export class MapEditor extends React.Component {
                         zoom: 14
                     }}
                     style={{ width: '100%', height: '100%' }}
-                    mapStyle="https://api.maptiler.com/maps/basic-v2-dark/style.json?key=YhIvc4qfFYwztR7fIzod"
+                    mapStyle={process.env.REACT_APP_MAPTILER_URL}
                 >
                     <DrawControl
                         position="top-left"
