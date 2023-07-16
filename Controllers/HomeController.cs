@@ -1,4 +1,5 @@
-﻿using MapViewer.Database.Types;
+﻿using MapViewer.Database;
+using MapViewer.Database.Types;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MapViewer.Controllers
@@ -14,16 +15,50 @@ namespace MapViewer.Controllers
             _logger = logger;
         }
         [HttpGet]
-        public string Get()
+        public object Get()
         {
-            return "api version 1.0";
+            return new
+            {
+                version = "1.0.0"
+            };
         }
 
         [HttpPost("SendFeature")]
         public bool SendFeature([FromBody] Feature feature)
         {
+            var context = new MapDbContext();
+            var featureForUpdate = context.Features.FirstOrDefault(x => x.Id == feature.Id);
+            if(featureForUpdate == null)
+            {
+                context.Features.Add(feature);
+            }
+            else
+            {
+                featureForUpdate.Properties = feature.Properties;
+                featureForUpdate.Geometry = feature.Geometry;
+            }
+            context.SaveChanges();
             return true;
         }
+
+        [HttpPost("DeleteFeature")]
+        public bool DeleteFeature([FromBody] string id)
+        {
+            var context = new MapDbContext();
+            var featureForDelete = context.Features.FirstOrDefault(x => x.Id == id);
+            if (featureForDelete == null)
+                return false;
+            context.Features.Remove(featureForDelete);
+            context.SaveChanges();
+            return true;
+        }
+        [HttpGet("GetAllFeatures")]
+        public Feature[] GetAllFeatures()
+        {
+            var context = new MapDbContext();
+            return context.Features.ToArray();
+        }
+
         [HttpGet("HelloWorld")]
         public string HelloWorld()
         {

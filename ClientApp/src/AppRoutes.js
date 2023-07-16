@@ -1,5 +1,5 @@
 import { Home } from "./components/Home";
-import { MapEditor } from "./components/Map";
+import MapEditor from "./components/Map";
 import { Editor } from "./components/Editor";
 
 const AppRoutes = [

@@ -1,10 +1,24 @@
 ﻿import MapboxDraw from '@mapbox/mapbox-gl-draw';
 import { useControl } from 'react-map-gl';
+import { useEffect } from 'react';
 
+export function DrawControl(props) {
+    var draw;
 
-export default function DrawControl(props) {
+    useEffect(() => {
+        fetch('api/Home/GetAllFeatures')
+            .then(response => response.json())
+            .then(result => {
+                result.forEach(feature => {
+                    draw.add(feature);
+                })
+            })
+    }, [draw])
     useControl(
-        () => new MapboxDraw(props),
+        () => {
+            draw = new MapboxDraw(props);
+            return draw;
+        },
         ({ map }) => {
             map.on('draw.create', props.onCreate);
             map.on('draw.update', props.onUpdate);
@@ -19,6 +33,7 @@ export default function DrawControl(props) {
             position: props.position
         }
     );
+
     return null;
 }
 DrawControl.defaultProps = {
